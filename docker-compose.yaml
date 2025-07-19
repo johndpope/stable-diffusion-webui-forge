@@ -17,13 +17,13 @@ services:
     
 
     ## For Nvidia GPU's - You probably want to uncomment this
-    #deploy:
-    #  resources:
-    #    reservations:
-    #      devices:
-    #        - driver: nvidia
-    #          count: all
-    #          capabilities: [gpu]
+    deploy:
+     resources:
+       reservations:
+         devices:
+           - driver: nvidia
+             count: all
+             capabilities: [gpu]
 
     devices:
       - "/dev/dri:/dev/dri"
@@ -56,14 +56,14 @@ services:
     environment:
         # Don't enclose values in quotes
         - DIRECT_ADDRESS=${DIRECT_ADDRESS:-127.0.0.1}
-        - DIRECT_ADDRESS_GET_WAN=${DIRECT_ADDRESS_GET_WAN:-false}
+        - DIRECT_ADDRESS_GET_WAN=${DIRECT_ADDRESS_GET_WAN:-true}
         - WORKSPACE=${WORKSPACE:-/workspace}
         - WORKSPACE_SYNC=${WORKSPACE_SYNC:-false}
         - CF_TUNNEL_TOKEN=${CF_TUNNEL_TOKEN:-}
-        - CF_QUICK_TUNNELS=${CF_QUICK_TUNNELS:-true}
+        - CF_QUICK_TUNNELS=${CF_QUICK_TUNNELS:-false}
         - CIVITAI_TOKEN=${CIVITAI_TOKEN:-}
         - HF_TOKEN=${HF_TOKEN:-}
-        - WEB_ENABLE_AUTH=${WEB_ENABLE_AUTH:-true}
+        - WEB_ENABLE_AUTH=${WEB_ENABLE_AUTH:-false}
         - WEB_ENABLE_HTTPS${WEB_ENABLE_HTTPS:-false}
         - WEB_USER=${WEB_USER:-user}
         - WEB_PASSWORD=${WEB_PASSWORD:-password}
@@ -73,7 +73,7 @@ services:
         - SERVICEPORTAL_METRICS_PORT=${SERVICEPORTAL_METRICS_PORT:-21111}
         - SERVICEPORTAL_URL=${SERVICEPORTAL_URL:-}
         - FORGE_BRANCH=${FORGE_BRANCH:-}
-        - FORGE_ARGS=${FORGE_ARGS:-}
+        - FORGE_ARGS=${FORGE_ARGS:-} --listen
         - FORGE_PORT_HOST=${FORGE_PORT_HOST:-7860}
         - FORGE_PORT_LOCAL=${FORGE_PORT_LOCAL:-17860}
         - FORGE_METRICS_PORT=${FORGE_METRICS_PORT:-27860}
